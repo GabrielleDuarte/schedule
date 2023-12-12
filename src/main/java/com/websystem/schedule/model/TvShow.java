@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Data
 @Entity(name="TvShow")
@@ -19,7 +20,6 @@ public class TvShow {
     private LocalDate date;
 
     @Column(nullable = true, length = 250)
-
     private String type;
 
     @Column(nullable = true, length = 250)
@@ -27,4 +27,5 @@ public class TvShow {
 
     @Column(nullable = false, length = 600)
     private String description;
+
 }
