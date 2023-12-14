@@ -1,14 +1,14 @@
 package com.websystem.schedule.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import com.websystem.schedule.model.TvShow;
-import com.websystem.schedule.repository.TvShowRepository;
+import com.websystem.schedule.repository.TvShowRepository
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TvShowServiceImpl implements TvShowService{
-    
+
     private final TvShowRepository tvShowRepository;
 
     public TvShowServiceImpl(TvShowRepository tvShowRepository) {
@@ -22,4 +22,7 @@ public class TvShowServiceImpl implements TvShowService{
         .orElseThrow(() -> new UsernameNotFoundException(message.get("erro.usuario.nao-autorizado")));;
     }
 
+    public List<TvShow> listTvShows() {
+       return tvShowRepository.findAll();
+    }
 }

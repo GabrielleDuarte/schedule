@@ -21,7 +21,6 @@ public class TvShow {
     private LocalDate date;
 
     @Column(nullable = true, length = 250)
-
     private String type;
 
     @Column(nullable = true, length = 250)
