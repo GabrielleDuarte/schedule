@@ -1,5 +1,6 @@
 package com.websystem.schedule.controller;
 
+import com.websystem.schedule.dto.TvShowDTO;
 import com.websystem.schedule.model.TvShow;
 import com.websystem.schedule.service.TvShowService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class TvShowController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<TvShow>> getTvShows() {
+    public ResponseEntity<List<TvShowDTO>> getTvShows() {
         return new ResponseEntity<>(tvShowService.listTvShows(), HttpStatus.OK);
     }
   
