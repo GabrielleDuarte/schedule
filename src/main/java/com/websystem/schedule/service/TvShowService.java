@@ -6,8 +6,10 @@ import com.websystem.schedule.model.TvShow;
 import java.util.List;
 
 public interface TvShowService {
-    public List<TvShow> listTvShows();
+    List<TvShow> listTvShows();
       
-    public Optional<TvShow> getTvShowById(Long Id);
+    Optional<TvShow> getTvShowById(Long Id);
+
+    void createTvShow(TvShow tvShow);
 }
 
