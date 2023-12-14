@@ -16,12 +16,18 @@ public class TvShowServiceImpl implements TvShowService{
     }
 
     @Override
+    public List<TvShow> listTvShows() {
+        return tvShowRepository.findAll();
+    }
+
+    @Override
     public Optional<TvShow> getTvShowById(Long Id) {
         return Optional.ofNullable(tvShowRepository.findById(Id)
                 .orElseThrow(() -> new IllegalStateException("The tv show equivalent to the id:" + Id + " does not exist")));
     }
 
-    public List<TvShow> listTvShows() {
-       return tvShowRepository.findAll();
+    @Override
+    public void createTvShow(TvShow tvShow) {
+        tvShowRepository.save(tvShow);
     }
 }
