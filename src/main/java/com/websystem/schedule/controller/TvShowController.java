@@ -27,7 +27,6 @@ public class TvShowController {
   
       @GetMapping("/detail")
     public ResponseEntity<TvShow> detail(@PathVariable Long Id) {
-        return new ResponseEntity<>(tvShowService.getTvShowById(Id), HttpStatus.OK);
+        return new ResponseEntity<>(tvShowService.getTvShowById(Id).get(), HttpStatus.OK);
     }
-
 }
