@@ -1,6 +1,5 @@
 package com.websystem.schedule.controller;
 
-import com.websystem.schedule.dto.TvShowDTO;
 import com.websystem.schedule.model.TvShow;
 import com.websystem.schedule.service.TvShowService;
 import org.springframework.http.HttpStatus;
@@ -18,18 +17,29 @@ public class TvShowController {
         this.tvShowService = tvShowService;
     }
 
+    @CrossOrigin()
     @GetMapping("/list")
-    public ResponseEntity<List<TvShowDTO>> getTvShows() {
-        return new ResponseEntity<>(tvShowService.listTvShows(), HttpStatus.OK);
-    }
-  
-    @GetMapping("/detail")
-    public ResponseEntity<TvShow> detail(@PathVariable Long Id) {
-        return new ResponseEntity<>(tvShowService.getTvShowById(Id).get(), HttpStatus.OK);
+    public List<TvShow> getTvShows() {
+        return tvShowService.listTvShows();
     }
 
+    @CrossOrigin()
+    @GetMapping("/details/{id}")
+    public ResponseEntity<TvShow> details(@PathVariable Long id) {
+        System.out.println("ID AQUI: "+ id);
+        return new ResponseEntity<>(tvShowService.getTvShowById(id).get(), HttpStatus.OK);
+    }
+
+    @CrossOrigin()
     @PostMapping(value = "/register")
-    public void registerTvShow(@ModelAttribute TvShow tvShow ) {
+    public void registerTvShow(@RequestBody TvShow tvShow ) {
         tvShowService.createTvShow(tvShow);
     }
+
+    @CrossOrigin()
+    @GetMapping("/searchbyname")
+    public ResponseEntity<List<TvShow>> searchByName(@RequestParam String name) {
+        return new ResponseEntity<>(tvShowService.searchByName(name), HttpStatus.OK);
+    }
+
 }
