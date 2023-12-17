@@ -1,14 +1,11 @@
 package com.websystem.schedule.service;
 
-import com.websystem.schedule.dto.TvShowDTO;
 import org.springframework.stereotype.Service;
 import com.websystem.schedule.model.TvShow;
 import com.websystem.schedule.repository.TvShowRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.modelmapper.ModelMapper;
 
 @Service
 public class TvShowServiceImpl implements TvShowService{
@@ -21,16 +18,10 @@ public class TvShowServiceImpl implements TvShowService{
     }
 
     @Override
-    public List<TvShowDTO> listTvShows() {
+    public List<TvShow> listTvShows() {
         var tvShows = tvShowRepository.findAll();
-        ModelMapper modelMapper = new ModelMapper();
-        List<TvShowDTO> tvShowsListPage= new ArrayList<>();
 
-       for (TvShow tS : tvShows){
-          TvShowDTO tSListPage = modelMapper.map(tS, TvShowDTO.class);
-           tvShowsListPage.add(tSListPage);
-        }
-       return tvShowsListPage;
+       return tvShows;
     }
 
     @Override
@@ -42,5 +33,10 @@ public class TvShowServiceImpl implements TvShowService{
     @Override
     public void createTvShow(TvShow tvShow) {
         tvShowRepository.save(tvShow);
+    }
+
+    @Override
+    public List<TvShow> searchByName(String name) {
+        return tvShowRepository.findByName(name);
     }
 }
