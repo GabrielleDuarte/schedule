@@ -20,7 +20,6 @@ public class TvShowServiceImpl implements TvShowService{
     @Override
     public List<TvShow> listTvShows() {
         var tvShows = tvShowRepository.findAll();
-
        return tvShows;
     }
 

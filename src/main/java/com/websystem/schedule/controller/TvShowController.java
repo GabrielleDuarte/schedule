@@ -26,7 +26,6 @@ public class TvShowController {
     @CrossOrigin()
     @GetMapping("/details/{id}")
     public ResponseEntity<TvShow> details(@PathVariable Long id) {
-        System.out.println("ID AQUI: "+ id);
         return new ResponseEntity<>(tvShowService.getTvShowById(id).get(), HttpStatus.OK);
     }
 
