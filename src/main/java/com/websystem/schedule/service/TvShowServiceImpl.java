@@ -1,5 +1,7 @@
 package com.websystem.schedule.service;
 
+import com.websystem.schedule.dto.TVShowDTO;
+import com.websystem.schedule.mapper.TVShowMapper;
 import org.springframework.stereotype.Service;
 import com.websystem.schedule.model.TvShow;
 import com.websystem.schedule.repository.TvShowRepository;
@@ -11,6 +13,7 @@ import java.util.Optional;
 public class TvShowServiceImpl implements TvShowService{
 
     private final TvShowRepository tvShowRepository;
+    private TVShowMapper mapper;
 
     public TvShowServiceImpl(TvShowRepository tvShowRepository) {
         super();
@@ -37,5 +40,17 @@ public class TvShowServiceImpl implements TvShowService{
     @Override
     public List<TvShow> searchByName(String name) {
         return tvShowRepository.findByName(name);
+    }
+
+    @Override
+    public void updateTVShow(TVShowDTO tvShowDTO) {
+        TvShow tvShow = tvShowRepository.findById(tvShowDTO.getId()).orElseThrow();
+        mapper.updateTVShowFromDto(tvShowDTO, tvShow);
+        tvShowRepository.save(tvShow);
+    }
+
+    @Override
+    public void deleteTVShow(Long id) {
+        tvShowRepository.deleteById(id);
     }
 }

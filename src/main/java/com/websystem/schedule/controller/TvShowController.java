@@ -1,11 +1,14 @@
 package com.websystem.schedule.controller;
 
+import com.websystem.schedule.dto.TVShowDTO;
 import com.websystem.schedule.model.TvShow;
 import com.websystem.schedule.service.TvShowService;
+import org.modelmapper.internal.bytebuddy.asm.Advice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Struct;
 import java.util.List;
 
 @RestController
@@ -39,6 +42,20 @@ public class TvShowController {
     @GetMapping("/searchbyname")
     public ResponseEntity<List<TvShow>> searchByName(@RequestParam String name) {
         return new ResponseEntity<>(tvShowService.searchByName(name), HttpStatus.OK);
+    }
+
+    @CrossOrigin()
+    @PostMapping(value = "/update")
+    public HttpStatus updateTvShow(@RequestBody TVShowDTO tvShow ) {
+        tvShowService.updateTVShow(tvShow);
+        return HttpStatus.OK;
+    }
+
+    @CrossOrigin()
+    @DeleteMapping(value = "/delete")
+    public HttpStatus deleteTVShow(@RequestParam Long id ) {
+        tvShowService.deleteTVShow(id);
+        return HttpStatus.OK;
     }
 
 }
